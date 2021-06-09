@@ -1,0 +1,81 @@
+<header class="toolbar">
+  <ng-content></ng-content>
+  <button type="button" class="button" (click)="addChild()">Add child</button>
+</header>
+
+<label class="field" [filter]="'id'">
+  <span class="field__label">id</span>
+  <input class="input" [ngModel]="defaultId" (ngModelChange)="setId($event)">
+</label>
+
+<label class="field" [filter]="'info'">
+  <span class="field__label">info</span>
+  <input class="input" [(ngModel)]="node.info">
+</label>
+
+<label class="field" [filter]="'desc'">
+  <span class="field__label">desc</span>
+  <input class="input" [(ngModel)]="node.desc">
+</label>
+
+<label class="field" [filter]="'imageURL'">
+  <span class="field__label">imageURL</span>
+  <input class="input" [(ngModel)]="node.imageURL">
+</label>
+
+<label class="field" [filter]="'type'">
+  <span class="field__label">type</span>
+  <input class="input" [(ngModel)]="node.type">
+</label>
+
+<div class="field field--vertical" [filter]="'tags'">
+  <label class="field__label" [for]="'tags' + defaultId">tags</label>
+  <ul class="list list--inline">
+    <li class="list__item tag" *ngFor="let tag of node.tags">
+      {{ tag }}
+      <button type="button" class="button" (click)="removeTag(tag)">⨯</button>
+    </li>
+  </ul>
+  <input
+    #tagsInput
+    class="input"
+    [id]="'tags' + defaultId"
+    (keyup.enter)="addTag(tagsInput)">
+</div>
+
+<fieldset class="fieldset" [filter]="'options'">
+  <legend class="fieldset__label">options</legend>
+
+  <label class="field">
+    <span class="field__label">id</span>
+    <input class="input" [(ngModel)]="node.options.id">
+  </label>
+
+  <label class="field">
+    <span class="field__label">language</span>
+    <input class="input" [(ngModel)]="node.options.language">
+  </label>
+
+  <label class="field">
+    <span class="field__label">country</span>
+    <input class="input" [(ngModel)]="node.options.country">
+  </label>
+
+  <label class="field">
+    <span class="field__label">project</span>
+    <input class="input" [(ngModel)]="node.options.project">
+  </label>
+</fieldset>
+
+<ul class="list">
+  <li class="list__item" *ngFor="let child of node.children; let i = index">
+    <my-node [node]="child" [defaultId]="defaultId + (i + 1)">
+      <button
+        type="button"
+        class="button button--danger"
+        (click)="removeChild(child)">
+        Delete
+      </button>
+    </my-node>
+  </li>
+</ul>

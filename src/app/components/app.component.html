@@ -1,0 +1,32 @@
+<my-node [node]="root" [defaultId]="'L'">
+  <label class="field">
+    <span class="field__label">Filter</span>
+    <select class="input" [(ngModel)]="filter">
+      <option [ngValue]="null">-</option>
+      <option *ngFor="let filter of filters" [value]="filter">
+        {{ filter }}
+      </option>
+    </select>
+  </label>
+  <label class="button button--accent" tabindex="0">
+    Import
+    <input
+      #fileInput
+      type="file"
+      class="input"
+      accept=".json,application/json"
+      (change)="import(fileInput)">
+  </label>
+  <button
+    type="button"
+    class="button button--accent"
+    (click)="export()">
+    Export
+  </button>
+  <button
+    type="button"
+    class="button button--danger"
+    (click)="reset()">
+    Reset
+  </button>
+</my-node>

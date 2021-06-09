@@ -1,0 +1,249 @@
+:root {
+  --background: #eee;
+  --background-accent: #dde;
+  --background-light: #fff;
+  --border: 1px;
+  --border-color: #aaa;
+  --border-radius: calc(var(--border) * 4);
+  --shadow: calc(var(--border) * 6);
+  --shadow-color: #ddd;
+  --shadow-spread: var(--border);
+  --spacing: 1em;
+  --text: sans-serif;
+  --text-size: 1em;
+  --text-color: #333;
+  --text-color-accent: #6a6;
+  --text-color-danger: #c66;
+  --text-color-light: #666;
+
+  // filter: invert(1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+.tag .button {
+  background: var(--background-light);
+}
+
+body {
+  color: var(--text-color);
+  font-family: var(--text);
+  font-size: var(--text-size);
+  min-width: 720px;
+  overflow: auto;
+  padding: calc(var(--spacing) * 2);
+
+  @media screen and (min-width: 1280px) { 
+    margin: 0 20%;
+  }
+}
+
+[hidden],
+.button .input {
+  display: none !important;
+}
+
+:not(.list__item) > my-node > .toolbar {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+.toolbar,
+.field,
+.field__label {
+  display: flex;
+}
+
+.toolbar,
+.field__label,
+.button,
+.tag {
+  align-items: center;
+}
+
+.toolbar {
+  justify-content: flex-end;
+  margin-bottom: calc(var(--spacing) * -0.5);
+  position: relative;
+}
+
+.toolbar .field,
+.field .input {
+  flex: 1 1 auto;
+}
+
+.toolbar .button,
+.tag .button {
+  margin-left: calc(var(--spacing) * 0.5);
+}
+
+.fieldset,
+.field,
+.button {
+  border-radius: var(--border-radius);
+}
+
+.fieldset,
+.field__label,
+.button {
+  color: var(--text-color-light);
+}
+
+.fieldset,
+.input,
+.button {
+  border: var(--border) solid;
+}
+
+.fieldset,
+.list {
+  margin: 0;
+}
+
+.fieldset {
+  padding: var(--spacing);
+
+  &:not(:first-child) {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+}
+
+.fieldset__label,
+.field__label,
+.button {
+  font-size: 0.85em !important;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.field,
+.button {
+  background: var(--background);
+}
+
+.field {
+  &__label {
+    flex: none;
+    padding: 0 calc(var(--spacing) * 0.75);
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--vertical &__label {
+    padding: calc(var(--spacing) * 0.75) 0;
+  }
+}
+
+:not(.fieldset__label) + .field,
+.list:not(.list--inline) > .list__item:not(:first-child) {
+  margin-top: var(--spacing);
+}
+
+.field__label,
+.button {
+  cursor: pointer;
+  justify-content: center;
+}
+
+.input,
+.list {
+  width: 100%;
+}
+
+.input,
+.button {
+  border-color: var(--border-color);
+  font: inherit;
+  outline: none;
+  padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 0.75);
+}
+
+input {
+  color: inherit;
+}
+
+.input:hover,
+.input:focus,
+.button:hover,
+.button:focus {
+  border-color: currentColor;
+  box-shadow: 0 0 var(--shadow) var(--shadow-spread) var(--shadow-color);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+
+  &:not(&--inline):not(:empty) {
+    border-left: var(--border) dashed var(--border-color);
+    margin: var(--spacing) 0;
+    padding-left: var(--spacing);
+  }
+
+  &--inline:not(:empty) {
+    padding-top: 0 !important;
+  }
+
+  .toolbar::before {
+    border-top: var(--border) dashed var(--border-color);
+    content: '';
+    display: block;
+    left: calc(var(--spacing) * -1);
+    position: absolute;
+    top: 50%;
+  }
+}
+
+.list--inline:not(:empty),
+.tag .button {
+  padding: calc(var(--spacing) * 0.5);
+}
+
+.list .toolbar::before,
+.tag .button {
+  width: var(--spacing);
+}
+
+.button,
+.tag {
+  display: inline-flex;
+}
+
+.button {
+  &:not(:active) {
+    border-bottom-width: calc(var(--border) * 2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &--accent {
+    color: var(--text-color-accent);
+  }
+
+  &--danger {
+    color: var(--text-color-danger);
+  }
+}
+
+.tag {
+  background: var(--background-accent);
+  border-radius: calc(var(--spacing) * 2);
+  margin: calc(var(--spacing) * 0.25);
+  padding: calc(var(--spacing) * 0.25);
+  padding-left: calc(var(--spacing) * 0.75);
+
+  .button {
+    border-bottom-width: var(--border);
+    border-radius: 50%;
+    font-size: 1.25em !important;
+    height: var(--spacing);
+  }
+}
